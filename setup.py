@@ -13,6 +13,7 @@ OPTIONS = {
 
 setup(
     app=APP,
+    name="HP Lorem",
     data_files=DATA_FILES,
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],

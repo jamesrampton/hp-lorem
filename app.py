@@ -2,17 +2,24 @@ import rumps
 import subprocess
 
 
-class AwesomeStatusBarApp(rumps.App):
+class HPLorem(rumps.App):
     def __init__(self):
-        super(AwesomeStatusBarApp, self).__init__("Awesome App")
-        self.menu = ["Clipit"]
+        super(HPLorem, self).__init__("HP Lorem")
 
-    @rumps.clicked("Clipit")
-    def clip(self, _):
-        stuff = "This is some stuff"
+    def copy_to_clipboard(self, text):
         p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
-        p.stdin.write(stuff)
+        p.stdin.write(text)
         p.stdin.close()
 
+    @rumps.clicked("One word")
+    def one_word(self, _):
+        text = "Thing"
+        self.copy_to_clipboard(text)
+
+    @rumps.clicked("Two words")
+    def two_words(self, _):
+        text = "Thing things"
+        self.copy_to_clipboard(text)
+
 if __name__ == "__main__":
-    AwesomeStatusBarApp().run()
+    HPLorem().run()
