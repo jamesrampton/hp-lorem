@@ -4,7 +4,7 @@ import subprocess
 
 class HPLorem(rumps.App):
     def __init__(self):
-        super(HPLorem, self).__init__("HP Lorem")
+        super(HPLorem, self).__init__("(;,;)")
 
     def copy_to_clipboard(self, text):
         p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
