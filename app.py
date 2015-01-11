@@ -1,5 +1,8 @@
 import rumps
 import subprocess
+from random import randint
+
+from texts.texts import TEXTS as t
 
 
 class HPLorem(rumps.App):
@@ -11,14 +14,10 @@ class HPLorem(rumps.App):
         p.stdin.write(text)
         p.stdin.close()
 
-    @rumps.clicked("One word")
+    @rumps.clicked("Title")
     def one_word(self, _):
-        text = "Thing"
-        self.copy_to_clipboard(text)
-
-    @rumps.clicked("Two words")
-    def two_words(self, _):
-        text = "Thing things"
+        texts = t['titles']
+        text = texts[randint(0, len(texts))]
         self.copy_to_clipboard(text)
 
 if __name__ == "__main__":
