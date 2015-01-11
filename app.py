@@ -15,8 +15,14 @@ class HPLorem(rumps.App):
         p.stdin.close()
 
     @rumps.clicked("Title")
-    def one_word(self, _):
+    def title(self, _):
         texts = t['titles']
+        text = texts[randint(0, len(texts))]
+        self.copy_to_clipboard(text)
+
+    @rumps.clicked("Paragraph")
+    def paragraph(self, _):
+        texts = t['paragraphs']
         text = texts[randint(0, len(texts))]
         self.copy_to_clipboard(text)
 
