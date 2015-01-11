@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-TEST = "fish"
 TEXTS = {
     'titles': [
         """The Alchemist""",
