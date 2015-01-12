@@ -16,19 +16,20 @@ class HPLorem(rumps.App):
         with p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE):
             p.stdin.write(text)
 
-    @rumps.clicked("Title")
-    def title(self, _):
-        self.previous_title = self.latest_title
+    def get_new_random_item(self, items, previous_item):
         while self.latest_paragraph == self.previous_title:
             self.latest_title = random.choice(self.paragraphs)
         self.copy_to_clipboard(self.latest_title)
 
+    @rumps.clicked("Title")
+    def title(self, _):
+        self.latest_title = get_new_random_item(self.titles, self.latest_title)
+        return copy_to_clipboard(self.latest_item)
+
     @rumps.clicked("Paragraph")
     def paragraph(self, _):
-        self.previous_paragraph = self.latest_paragraph
-        while self.latest_paragraph == self.previous_paragraph:
-            self.latest_paragraph = random.choice(self.paragraphs)
-        self.copy_to_clipboard(self.latest_paragraph)
+        self.latest_paragraph = get_new_random_item(self.paragraphs, self.latest_paragraph)
+        return copy_to_clipboard(self.latest_paragraph)
 
 if __name__ == "__main__":
     HPLorem().run()
