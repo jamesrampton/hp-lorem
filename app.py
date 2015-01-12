@@ -1,19 +1,22 @@
-from pipes import quote
 import rumps
 import random
-import os
+import subprocess
 from texts.texts import TEXTS
 
 
 class HPLorem(rumps.App):
-    
+
     def __init__(self, titles, paragraphs):
         super(HPLorem, self).__init__("(;,;)")
         self.paragraphs = paragraphs
         self.titles = titles
+        self.latest_paragraph = None
+        self.latest_title = None
 
     def copy_to_clipboard(self, text):
-        os.system(u'pbcopy "{}"'.format(quote(text)))
+        p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
+        p.stdin.write(text)
+        p.stdin.close()
 
     def get_new_random_item(self, items, previous_item):
         new_item = None
@@ -24,12 +27,12 @@ class HPLorem(rumps.App):
 
     @rumps.clicked("Title")
     def title(self, _):
-        self.latest_title = get_new_random_item(self.titles, self.latest_title)
-        return self.copy_to_clipboard(self.latest_item)
+        self.latest_title = self.get_new_random_item(self.titles, self.latest_title)
+        return self.copy_to_clipboard(self.latest_title)
 
     @rumps.clicked("Paragraph")
     def paragraph(self, _):
-        self.latest_paragraph = get_new_random_item(self.paragraphs, self.latest_paragraph)
+        self.latest_paragraph = self.get_new_random_item(self.paragraphs, self.latest_paragraph)
         return self.copy_to_clipboard(self.latest_paragraph)
 
 if __name__ == "__main__":
