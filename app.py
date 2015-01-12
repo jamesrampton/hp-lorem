@@ -13,7 +13,7 @@ class HPLorem(rumps.App):
         self.titles = titles
 
     def copy_to_clipboard(self, text):
-        os.system('pbcopy "{}"'.format(quote(text)))
+        os.system(u'pbcopy "{}"'.format(quote(text)))
 
     def get_new_random_item(self, items, previous_item):
         new_item = None
