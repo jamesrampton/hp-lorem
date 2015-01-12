@@ -7,10 +7,10 @@ from texts.texts import TEXTS as t
 
 class HPLorem(rumps.App):
     
-    def __init__(self):
+    def __init__(self, titles, paragraphs):
         super(HPLorem, self).__init__("(;,;)")
-        self.paragraphs = t['paragraphs']
-        self.titles = t['titles']
+        self.paragraphs = paragraphs
+        self.titles = titles
 
     def copy_to_clipboard(self, text):
         with p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE):
@@ -34,4 +34,4 @@ class HPLorem(rumps.App):
         return copy_to_clipboard(self.latest_paragraph)
 
 if __name__ == "__main__":
-    HPLorem().run()
+    HPLorem(t['paragraphs'], t['titles']).run()
