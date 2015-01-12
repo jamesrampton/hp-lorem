@@ -17,7 +17,9 @@ class HPLorem(rumps.App):
             p.stdin.write(text)
 
     def get_new_random_item(self, items, previous_item):
-        while self.latest_paragraph == previous_item:
+        new_item = None
+        while new_item == previous_item:
+            # Keep going until we get a different one
             new_item = random.choice(items)
         return new_item
 
