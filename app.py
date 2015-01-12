@@ -17,9 +17,9 @@ class HPLorem(rumps.App):
             p.stdin.write(text)
 
     def get_new_random_item(self, items, previous_item):
-        while self.latest_paragraph == self.previous_title:
-            self.latest_title = random.choice(self.paragraphs)
-        self.copy_to_clipboard(self.latest_title)
+        while self.latest_paragraph == previous_item:
+            new_item = random.choice(items)
+        return new_item
 
     @rumps.clicked("Title")
     def title(self, _):
