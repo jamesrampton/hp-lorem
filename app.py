@@ -1,42 +1,39 @@
+from pipes import quote
 import rumps
-import subprocess
-from random import randint
-
-from texts.texts import TEXTS as t
+import random
+import os
+from texts.texts import TEXTS
 
 
 class HPLorem(rumps.App):
-    def __init__(self):
+    
+    def __init__(self, titles, paragraphs):
         super(HPLorem, self).__init__("(;,;)")
-        self.prev_rand = None
-        self.curr_rand = None
+        self.paragraphs = paragraphs
+        self.titles = titles
 
     def copy_to_clipboard(self, text):
-        p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
-        p.stdin.write(text)
-        p.stdin.close()
+        os.system(u'pbcopy "{}"'.format(quote(text)))
 
-    def get_number(self, length=1, start=0):
-        self.curr_rand = randint(start, length)
-        if self.prev_rand >= 0:
-            if self.curr_rand == self.prev_rand:
-                self.get_number(length, start)
-        self.prev_rand = self.curr_rand
-        return self.curr_rand
-
-    def get_text(self, texts):
-        length = len(texts)-1
-        return texts[self.get_number(length)]
+    def get_new_random_item(self, items, previous_item):
+        new_item = None
+        while new_item == previous_item:
+            # Keep going until we get a different one
+            new_item = random.choice(items)
+        return new_item
 
     @rumps.clicked("Title")
     def title(self, _):
-        texts = t['titles']
-        self.copy_to_clipboard(self.get_text(texts))
+        self.latest_title = get_new_random_item(self.titles, self.latest_title)
+        return self.copy_to_clipboard(self.latest_item)
 
     @rumps.clicked("Paragraph")
     def paragraph(self, _):
-        texts = t['paragraphs']
-        self.copy_to_clipboard(self.get_text(texts))
+        self.latest_paragraph = get_new_random_item(self.paragraphs, self.latest_paragraph)
+        return self.copy_to_clipboard(self.latest_paragraph)
 
 if __name__ == "__main__":
-    HPLorem().run()
+    HPLorem(
+        titles=TEXTS['titles'],
+        paragraphs=TEXTS['paragraphs'],
+    ).run()
