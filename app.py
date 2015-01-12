@@ -25,12 +25,12 @@ class HPLorem(rumps.App):
     @rumps.clicked("Title")
     def title(self, _):
         self.latest_title = get_new_random_item(self.titles, self.latest_title)
-        return copy_to_clipboard(self.latest_item)
+        return self.copy_to_clipboard(self.latest_item)
 
     @rumps.clicked("Paragraph")
     def paragraph(self, _):
         self.latest_paragraph = get_new_random_item(self.paragraphs, self.latest_paragraph)
-        return copy_to_clipboard(self.latest_paragraph)
+        return self.copy_to_clipboard(self.latest_paragraph)
 
 if __name__ == "__main__":
     HPLorem(
