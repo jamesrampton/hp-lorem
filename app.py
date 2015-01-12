@@ -1,6 +1,7 @@
+from pipes import quote
 import rumps
 import random
-import subprocess
+import os
 from texts.texts import TEXTS
 
 
@@ -12,8 +13,7 @@ class HPLorem(rumps.App):
         self.titles = titles
 
     def copy_to_clipboard(self, text):
-        with p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE):
-            p.stdin.write(text)
+        os.system('pbcopy "{}"'.format(quote(text)))
 
     def get_new_random_item(self, items, previous_item):
         new_item = None
