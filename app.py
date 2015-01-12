@@ -1,8 +1,7 @@
 import rumps
 import random
 import subprocess
-from random import randint
-from texts.texts import TEXTS as t
+from texts.texts import TEXTS
 
 
 class HPLorem(rumps.App):
@@ -35,6 +34,6 @@ class HPLorem(rumps.App):
 
 if __name__ == "__main__":
     HPLorem(
-        titles=t['titles'],
-        paragraphs=t['paragraphs']
+        titles=TEXTS['titles'],
+        paragraphs=TEXTS['paragraphs'],
     ).run()
