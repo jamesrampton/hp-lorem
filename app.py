@@ -34,4 +34,7 @@ class HPLorem(rumps.App):
         return copy_to_clipboard(self.latest_paragraph)
 
 if __name__ == "__main__":
-    HPLorem(t['paragraphs'], t['titles']).run()
+    HPLorem(
+        titles=t['titles'],
+        paragraphs=t['paragraphs']
+    ).run()
