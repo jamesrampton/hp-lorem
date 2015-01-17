@@ -19,9 +19,12 @@ class HPLorem(rumps.App):
         p.stdin.close()
 
     def get_new_random_item(self, items, previous_item):
-        new_item = None
-        while new_item == previous_item:
-            # Keep going until we get a different one
+        if previous_item is not None:
+            new_item = previous_item
+            while new_item == previous_item:
+                # Keep going until we get a different one
+                new_item = random.choice(items)
+        else:
             new_item = random.choice(items)
         return new_item
 
