@@ -14,7 +14,7 @@ class HPLorem(rumps.App):
 
     def copy_to_clipboard(self, text):
         p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
-        p.stdin.write(text)
+        p.stdin.write(text + '\n')
         p.stdin.close()
 
     def get_new_random_item(self, items, previous_item):
