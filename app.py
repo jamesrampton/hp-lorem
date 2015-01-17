@@ -10,8 +10,7 @@ class HPLorem(rumps.App):
         super(HPLorem, self).__init__("(;,;)")
         self.paragraphs = paragraphs
         self.titles = titles
-        self.latest_paragraph = None
-        self.latest_title = None
+        self.latest_paragraph, self.latest_title = 0, 0
 
     def copy_to_clipboard(self, text):
         p = subprocess.Popen(['pbcopy'], stdin=subprocess.PIPE)
@@ -19,12 +18,9 @@ class HPLorem(rumps.App):
         p.stdin.close()
 
     def get_new_random_item(self, items, previous_item):
-        if previous_item is not None:
-            new_item = previous_item
-            while new_item == previous_item:
-                # Keep going until we get a different one
-                new_item = random.choice(items)
-        else:
+        new_item = previous_item
+        while new_item == previous_item:
+            # Keep going until we get a different one
             new_item = random.choice(items)
         return new_item
 
